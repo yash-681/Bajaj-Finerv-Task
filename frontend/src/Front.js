@@ -14,14 +14,14 @@ const Front = () => {
     try {
       const parsedInput = JSON.parse(jsonInput);
       if (!Array.isArray(parsedInput.data)) {
-        setError('Invalid JSON format');
+        setError('Invalid JSON format: Data should be an array.');
         return;
       }
-      const res = await axios.post('https://bajaj-finerv-task.vercel.app/bfhl', parsedInput);
+      const res = await axios.post('https://your-backend-url/bfhl', parsedInput);
       setResponse(res.data);
       setError('');
     } catch (err) {
-      setError('Invalid JSON format or server error');
+      setError(err.response?.data?.message || 'Server error');
     }
   };
 
